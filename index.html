@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>課題管理アプリ</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>課題管理アプリ</h1>
+        <form class="task-form">
+            <input type="text" id="taskName" placeholder="課題名">
+            <input type="text" id="taskContent" placeholder="課題内容">
+            <input type="text" id="subjectTag" placeholder="教科">
+            <select id="progress">
+                <option value="0">0%</option>
+                <option value="10">10%</option>
+                <option value="20">20%</option>
+                <option value="30">30%</option>
+                <option value="40">40%</option>
+                <option value="50">50%</option>
+                <option value="60">60%</option>
+                <option value="70">70%</option>
+                <option value="80">80%</option>
+                <option value="90">90%</option>
+                <option value="100">100%</option>
+                </select>
+                <input type="date" id="dueDate" min="2022-01-01" max="2099-12-31">
+                <button type="button" onclick="addTask()">追加</button>
+                </form>
+                <div class="task-list" id="taskList"></div>
+                </div>
+    <script src="script.js"></script>
+</body>
+</html>
