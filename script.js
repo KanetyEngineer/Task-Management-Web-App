@@ -214,3 +214,30 @@ function createTaskElement(task) {
 
     return taskElement;
 }
+
+// 進行度変更用のセレクトボックスを追加
+const progressSelectCopy = progressSelect.cloneNode(true);
+progressSelectCopy.value = progress; // 選択された進行度を設定
+progressSelectCopy.addEventListener('change', function() {
+    const selectedProgress = this.value;
+    progressIndicator.style.width = `${selectedProgress}%`;
+
+    // 進行度が100の場合は背景色を緑に
+    if (selectedProgress === '100') {
+        taskElement.style.backgroundColor = 'rgb(128, 255, 103)';
+    } else {
+        // 進行度が100でない場合は背景色を元に戻す
+        const today = new Date();
+        const dueDateValue = new Date(task.dueDate);
+        const oneWeekBefore = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000); // 一週間前
+        if (dueDateValue <= today && selectedProgress !== '100') {
+            taskElement.style.backgroundColor = 'rgb(255, 103, 103)'; // 期限が過ぎて進行度が100でない場合は赤色
+        } else if (dueDateValue <= oneWeekBefore && selectedProgress !== '100') {
+            taskElement.style.backgroundColor = 'rgb(255, 199, 80)'; // 期限の一週間前で進行度が100でない場合は黄色
+        } else {
+            taskElement.style.backgroundColor = ''; // それ以外はデフォルトの背景色に
+        }
+    }
+
+    saveTasks(); // 進行度変更後にローカルストレージに保存
+});
